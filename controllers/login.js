@@ -14,13 +14,28 @@ router.post('/', function(req, res){
 			password: req.body.password
 		};
 
-		userModel.validate(user, function(status){
-			if(status){
-				res.cookie('username', req.body.uname);
+		
+
+		userModel.validate(user, function(result){
+				console.log(result);
+				if (result[0].type=='admin') {
+					res.cookie('username', req.body.uname);
 				res.redirect('/home');
-			}else{
-				res.redirect('/login');
-			}
+				}
+				else if (result[0].type=='moderator') {
+					res.cookie('username', req.body.uname);
+				res.redirect('/home1');
+				}
+				/*else if (result[0].type=='member') {
+					res.cookie('username', req.body.uname);
+				res.redirect('/home1');
+				}*/
+			
+				else{
+					res.redirect('/login');
+				}
+
+
 		});
 });
 

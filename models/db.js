@@ -6,7 +6,7 @@ var getConnection = function(callback){
 	  host     : 'localhost',
 	  user     : 'root',
 	  password : '',
-	  database : 'ftps'
+	  database : 'ocr'
 	});
 	
 	connection.connect(function(err) {

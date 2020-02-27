@@ -2,7 +2,7 @@ var db = require('./db');
 
 module.exports ={
 	getById: function(id, callback){
-		var sql = "select * from user where userid=?";
+		var sql = "select * from user where id=?";
 		db.getResult(sql, [id], function(result){
 			if(result.length > 0){
 				callback(result[0]);
@@ -25,9 +25,10 @@ module.exports ={
 		var sql = "select * from user where username=? and password=?";
 		db.getResult(sql, [user.username, user.password], function(result){
 			if(result.length > 0){
-				callback(true);
+				//console.log(result);
+				callback(result);
 			}else{
-				callback(false);
+				//callback(false);
 			}
 		});
 	},
@@ -42,9 +43,9 @@ module.exports ={
 		});
 	},
 	insert: function(user, callback){
-		var sql = "insert into user values(?,?,?,?,?,?,?)";
+		var sql = "insert into user values(?,?,?,?,?)";
 
-		db.execute(sql, [null,user.username,user.firstname,user.contactno,user.email, user.password, user.type], function(status){
+		db.execute(sql, [null,user.FullName,user.username, user.password, user.type], function(status){
 			if(status){
 				callback(true);
 			}else{
@@ -63,8 +64,8 @@ module.exports ={
 		});
 	},
 	update: function(user, callback){
-		var sql = "update user set username=?,firstname=?, contactno=?,email=?,password=? type=? where id=?";
-		db.execute(sql, [user.username,user.firstname, user.contactno,user.email,user.password, user.type, user.id], function(status){
+		var sql = "update user set FullName=?,username=?, password=?, type=? where id=?";
+		db.execute(sql, [user.FullName,user.username, user.password, user.type, user.id], function(status){
 			if(status){
 				callback(true);
 			}else{

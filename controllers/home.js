@@ -31,23 +31,21 @@ router.get('/alluser', function(req, res){
 })
 
 
-router.get('/edit/:userid', function(req, res){
+router.get('/edit/:id', function(req, res){
 	
-	userModel.getById(req.params.userid, function(result){
+	userModel.getById(req.params.id, function(result){
 		res.render('home/edit', {user: result});
 	});
 })
 
-router.post('/edit/:userid', function(req, res){
+router.post('/edit/:id', function(req, res){
 	
 	var user = {
-		username:req.body.username,
-		firstname: req.body.firstname,
-		contactno:req.body.contactno,
-		email:req.body.email,
-		password:req.body.password,
+		FullName:req.body.FullName,
+		username: req.body.username,
+		password: req.body.password,
 		type: req.body.type,
-		userid: req.params.userid
+		id: req.params.id
 	};
 
 	userModel.update(user, function(status){
@@ -58,16 +56,43 @@ router.post('/edit/:userid', function(req, res){
 		}
 	});
 })
+//Edit Profile:
 
-
-router.get('/delete/:userid', function(req, res){
+router.get('/profile/:id', function(req, res){
 	
-	userModel.getById(req.params.userid, function(result){
+	userModel.getById(req.params.id, function(result){
+		res.render('home/profile', {user: result});
+	});
+})
+
+router.post('/profile/:id', function(req, res){
+	
+	var user = {
+		FullName:req.body.FullName,
+		username: req.body.username,
+		password: req.body.password,
+		type: req.body.type,
+		id: req.params.id
+	};
+
+	userModel.update(user, function(status){
+		if(status){
+			res.redirect('/logout');
+		}else{
+			res.redirect('/home/profile/'+req.params.id);
+		}
+	});
+})
+
+//Delete
+router.get('/delete/:id', function(req, res){
+	
+	userModel.getById(req.params.id, function(result){
 		res.render('home/delete', {user: result});
 	});
 })
 
-router.post('/delete/:userid', function(req, res){
+router.post('/delete/:id', function(req, res){
 	
 	userModel.delete(req.params.id, function(status){
 		if(status){
@@ -80,7 +105,7 @@ router.post('/delete/:userid', function(req, res){
 router.post('/', function(req, res){
 		
 		var user ={
-			employeename: req.body.fullname,
+			FullName: req.body.FullName,
 			username: req.body.uname,
 			password: req.body.password,
 			type: req.body.type

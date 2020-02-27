@@ -8,6 +8,7 @@ var login 			= require('./controllers/login');
 var registration 	= require('./controllers/registration');
 var logout 			= require('./controllers/logout');
 var home 			= require('./controllers/home');
+var home1 			= require('./controllers/home1');
 
 var app = express();
 
@@ -24,6 +25,7 @@ app.use('/login', login);
 app.use('/registration', registration);
 app.use('/logout', logout);
 app.use('/home', home);
+app.use('/home1', home1);
 
 
 //routes

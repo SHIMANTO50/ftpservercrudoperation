@@ -14,25 +14,22 @@
 	<table border="1">
 		<tr>
 			<td>ID</td>
-			<td>User Name</td>
-			<td>firstname</td>
-			<td>contact</td>
-			<td>email</td>
-			<td>password</td>
-			<td>type</td>
+			<td>Full Name</td>
+			<td>Username</td>
+			<td>Password</td>
+			<td>Type</td>
+			<td>Action</td>
 		</tr>
 		<% for(var i=0; i < userlist.length; i++){ %>
 		<tr>
-			<td><%= userlist[i].userid %></td>
+			<td><%= userlist[i].id %></td>
+			<td><%= userlist[i].FullName %></td>
 			<td><%= userlist[i].username %></td>
-			<td><%= userlist[i].firstname %></td>
-			<td><%= userlist[i].contactno %></td>
-			<td><%= userlist[i].email %></td>
 			<td><%= userlist[i].password %></td>
 			<td><%= userlist[i].type %></td>
 			<td>
-				<a href="/home/edit/<%= userlist[i].userid %>">EDIT</a> | 
-				<a href="/home/delete/<%= userlist[i].userid %>">DELETE</a>  
+				<a href="/home/edit/<%= userlist[i].id %>">EDIT</a> | 
+				<a href="/home/delete/<%= userlist[i].id %>">DELETE</a>  
 			</td>
 		</tr>
 		<% } %>
